@@ -12,7 +12,7 @@ const repositoryMock = {
 const sut = new UserService(repositoryMock);
 
 describe("UserService", () => {
-  it("should be able to return a error if user already exists", async () => {
+  it("Should be able to return a error if user already exists", async () => {
     const paramsMock = {
       name: "João",
       email: "joaovictor@gmail.com",

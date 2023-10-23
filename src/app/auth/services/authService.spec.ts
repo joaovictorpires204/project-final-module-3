@@ -12,7 +12,7 @@ describe("AuthService", () => {
     beforeEach(() => { 
         vi.clearAllMocks()
     })
-  it("should be alble to return an error if email not found", async () => {
+  it("Should be alble to return an error if email not found", async () => {
     const paramsMock = { email: "p@gmail.com", password: "11212121" };
     vi.spyOn(userRepositoryMock, "findByEmail").mockResolvedValue(null);
 
@@ -27,7 +27,7 @@ describe("AuthService", () => {
     expect(result).toStrictEqual(expected);
   });
 
-  it("should be alble to return an error if the password is invalid", async () => {
+  it("Should be able to return an error if the password is invalid", async () => {
     const paramsMock = { email: "p@gmail.com", password: "12345678" };
     const userMock = { _id: 1, name: "Joao", password: "12345678" } as any;
     vi.spyOn(userRepositoryMock, "findByEmail").mockResolvedValue(userMock);
@@ -44,7 +44,7 @@ describe("AuthService", () => {
     expect(result).toStrictEqual(expected);
   });
 
-  it("should be alble to return the token and the user", async () => {
+  it("Should be alble to return the token and the user", async () => {
     const paramMock = { email: "p@gmail.com", password: "12345678" };
     const userMock = {
       _id: 1,
