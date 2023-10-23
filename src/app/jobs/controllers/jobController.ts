@@ -14,14 +14,10 @@ class JobController {
       position: yup.string().required(),
       salary: yup.number().required(),
       city: yup.string().required(),
+      jobWebsite: yup.string().required(),
       technologies: yup.string().required(),
       company: yup.string().required(),
-      jobType: yup.string().required(),
-      jobRegime: yup.string().required(),
-      companySizeEmployees: yup.number().required(),
-      levelExperience: yup.string().required(),
       jobDescription: yup.string().required(),
-      jobWebsite: yup.string().required(),
       url: yup.string().required(),
     });
 
@@ -57,7 +53,7 @@ class JobController {
     }
 
     const result = await this.service.findByQuery(query);
-
+    
     if ("error" in result) {
       return res.status(result.status).json(result);
     }

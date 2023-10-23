@@ -12,7 +12,7 @@ class JobService {
       if(jobAlreadyExists){ 
         return commonError("This Job position already exists in our Db please create a different one", STATUS_CODE.BAD_REQUEST)
       }
-      const result = await this.repository.create(data)
+      const result = await this.repository.create(jobAlreadyExists)
       return result
     } catch (e: any) {
       return commonError(e.message, STATUS_CODE.INTERNAL_SERVER_ERROR)
