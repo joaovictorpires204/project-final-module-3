@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start:dev": "tsx watch src/index.ts",
-    "start": "node src/index.ts",
+    "start": "node src/index.cjs",
     "build": "tsup src",
     "test": "vitest"
   },

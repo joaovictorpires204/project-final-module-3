@@ -1,0 +1,12 @@
+"use strict";
+exports.__esModule = true;
+exports.routes = void 0;
+var express_1 = require("express");
+var userRouter_1 = require("./userRouter");
+var jobRouter_1 = require("./jobRouter");
+var authRouter_1 = require("./authRouter");
+var routes = (0, express_1.Router)();
+exports.routes = routes;
+routes.use("/users", userRouter_1.userRouter);
+routes.use("/jobs", jobRouter_1.jobRouter);
+routes.use("/auth", authRouter_1.authRouter);

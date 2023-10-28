@@ -1,5 +1,5 @@
-const {express} = require("express");
-import dotenv from "dotenv";
+const express =  require ("express");
+const dotenv = require ("dotenv");
 import { DatabaseConfig } from "./database/dbConnection";
 import { routes } from "./routes";
 
