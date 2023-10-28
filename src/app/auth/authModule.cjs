@@ -1,9 +1,9 @@
 "use strict";
 exports.__esModule = true;
 exports.AuthModule = void 0;
-var userModule_1 = require("../users/userModule");
-var authMiddleware_1 = require("./controllers/authMiddleware");
-var authService_1 = require("./services/authService");
+var userModule_1 = require("../users/userModule.cjs");
+var authMiddleware_1 = require("./controllers/authMiddleware.cjs");
+var authService_1 = require("./services/authService.cjs");
 var AuthModule = /** @class */ (function () {
     function AuthModule() {
     }

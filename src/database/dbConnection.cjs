@@ -13,4 +13,4 @@ var DatabaseConfig = /** @class */ (function () {
     };
     return DatabaseConfig;
 }());
-exports.DatabaseConfig = DatabaseConfig;
+exports.DatabaseConfig = (DatabaseConfig);

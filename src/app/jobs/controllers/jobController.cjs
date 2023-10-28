@@ -37,9 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.JobController = void 0;
-var commonError_1 = require("../../../utils/commmonError/commonError");
+var commonError_1 = require("../../../utils/commmonError/commonError.cjs");
 var yup = require("yup");
-var statusCode_1 = require("../../../utils/statusCode");
+var statusCode_1 = require("../../../utils/statusCode.cjs");
 var JobController = /** @class */ (function () {
     function JobController(service) {
         this.service = service;

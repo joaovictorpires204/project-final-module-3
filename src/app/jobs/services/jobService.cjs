@@ -36,39 +36,64 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.UserRepository = void 0;
-var commonError_1 = require("../../../utils/commmonError/commonError");
-var statusCode_1 = require("../../../utils/statusCode");
-var UserRepository = /** @class */ (function () {
-    function UserRepository(model) {
-        this.model = model;
+exports.JobService = void 0;
+var commonError_1 = require("../../../utils/commmonError/commonError.cjs");
+var statusCode_1 = require("../../../utils/statusCode.cjs");
+var JobService = /** @class */ (function () {
+    function JobService(repository) {
+        this.repository = repository;
     }
-    UserRepository.prototype.create = function (data) {
+    JobService.prototype.create = function (data) {
         return __awaiter(this, void 0, void 0, function () {
+            var jobAlreadyExists, result, e_1;
             return __generator(this, function (_a) {
-                try {
-                    return [2 /*return*/, this.model.create(data)];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, this.repository.findByPosition(data.position)];
+                    case 1:
+                        jobAlreadyExists = _a.sent();
+                        if (jobAlreadyExists) {
+                            return [2 /*return*/, (0, commonError_1.commonError)("This Job position already exists in our Db please create a different one", statusCode_1.STATUS_CODE.BAD_REQUEST)];
+                        }
+                        return [4 /*yield*/, this.repository.create(jobAlreadyExists)];
+                    case 2:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                    case 3:
+                        e_1 = _a.sent();
+                        return [2 /*return*/, (0, commonError_1.commonError)(e_1.message, statusCode_1.STATUS_CODE.INTERNAL_SERVER_ERROR)];
+                    case 4: return [2 /*return*/];
                 }
-                catch (error) {
-                    return [2 /*return*/, (0, commonError_1.commonError)(error.error, statusCode_1.STATUS_CODE.INTERNAL_SERVER_ERROR)];
-                }
-                return [2 /*return*/];
             });
         });
     };
-    UserRepository.prototype.findByEmail = function (email) {
+    JobService.prototype.findAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 try {
-                    return [2 /*return*/, this.model.findOne({ email: email })];
+                    return [2 /*return*/, this.repository.findAll()];
                 }
                 catch (e) {
-                    return [2 /*return*/, (0, commonError_1.commonError)(e.error, statusCode_1.STATUS_CODE.INTERNAL_SERVER_ERROR)];
+                    return [2 /*return*/, (0, commonError_1.commonError)(e.error, statusCode_1.STATUS_CODE.BAD_REQUEST)];
                 }
                 return [2 /*return*/];
             });
         });
     };
-    return UserRepository;
+    JobService.prototype.findByQuery = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                try {
+                    return [2 /*return*/, this.repository.findByQuery(data)];
+                }
+                catch (e) {
+                    return [2 /*return*/, (0, commonError_1.commonError)(e.error, statusCode_1.STATUS_CODE.BAD_REQUEST)];
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    return JobService;
 }());
-exports.UserRepository = UserRepository;
+exports.JobService = JobService;

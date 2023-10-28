@@ -1,10 +1,10 @@
 "use strict";
 exports.__esModule = true;
 exports.UserModule = void 0;
-var userEntity_1 = require("./entities/userEntity");
-var userRepository_1 = require("./repositories/userRepository");
-var userService_1 = require("./services/userService");
-var userController_1 = require("./controllers/userController");
+var userEntity_1 = require("./entities/userEntity.cjs");
+var userRepository_1 = require("./repositories/userRepository.cjs");
+var userService_1 = require("./services/userService.cjs");
+var userController_1 = require("./controllers/userController.cjs");
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }

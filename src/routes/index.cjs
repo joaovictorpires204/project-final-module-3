@@ -2,9 +2,9 @@
 exports.__esModule = true;
 exports.routes = void 0;
 var express_1 = require("express");
-var userRouter_1 = require("./userRouter");
-var jobRouter_1 = require("./jobRouter");
-var authRouter_1 = require("./authRouter");
+var userRouter_1 = require("./userRouter.cjs");
+var jobRouter_1 = require("./jobRouter.cjs");
+var authRouter_1 = require("./authRouter.cjs");
 var routes = (0, express_1.Router)();
 exports.routes = routes;
 routes.use("/users", userRouter_1.userRouter);

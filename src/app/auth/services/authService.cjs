@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,43 +47,40 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.UserController = void 0;
-var commonError_1 = require("../../../utils/commmonError/commonError");
-var yup = require("yup");
-var statusCode_1 = require("../../../utils/statusCode");
-var UserController = /** @class */ (function () {
-    function UserController(service) {
-        this.service = service;
+exports.AuthService = void 0;
+var JWT = require("jsonwebtoken");
+var bcrypt = require("bcrypt");
+var commonError_1 = require("../../../utils/commmonError/commonError.cjs");
+var authMapper_1 = require("../../../utils/mappers/authMapper.cjs");
+var statusCode_1 = require("../../../utils/statusCode.cjs");
+var AuthService = /** @class */ (function () {
+    function AuthService(userRepository) {
+        this.userRepository = userRepository;
     }
-    UserController.prototype.create = function (req, res) {
+    AuthService.prototype.auth = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var body, userValidate, result;
+            var user, validatePassword, payload, secretKey, options, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        body = req.body;
-                        userValidate = yup.object().shape({
-                            name: yup.string().required(),
-                            email: yup.string().email().required(),
-                            password: yup.string().required()
-                        });
-                        try {
-                            userValidate.validate(body);
-                        }
-                        catch (e) {
-                            return [2 /*return*/, res.status(statusCode_1.STATUS_CODE.BAD_REQUEST).json((0, commonError_1.commonError)(e.error, statusCode_1.STATUS_CODE.BAD_REQUEST))];
-                        }
-                        return [4 /*yield*/, this.service.create(body)];
+                    case 0: return [4 /*yield*/, this.userRepository.findByEmail(data.email)];
                     case 1:
-                        result = _a.sent();
-                        if ("error" in result) {
-                            return [2 /*return*/, res.status(result.status).json(result)];
+                        user = _a.sent();
+                        if (!user) {
+                            return [2 /*return*/, (0, commonError_1.commonError)("Email or password is not valid", statusCode_1.STATUS_CODE.BAD_REQUEST)];
                         }
-                        return [2 /*return*/, res.status(statusCode_1.STATUS_CODE.CREATED).json(result)];
+                        validatePassword = bcrypt.compareSync(data.password, user.password);
+                        if (!validatePassword) {
+                            return [2 /*return*/, (0, commonError_1.commonError)("Email or password is not valid", statusCode_1.STATUS_CODE.BAD_REQUEST)];
+                        }
+                        payload = __assign({}, authMapper_1.AuthMapper.toApi(user));
+                        secretKey = process.env.JWT_SECRET_KEY;
+                        options = { expiresIn: "5min" };
+                        token = JWT.sign(payload, secretKey, options);
+                        return [2 /*return*/, { token: token, user: authMapper_1.AuthMapper.toApi(user) }];
                 }
             });
         });
     };
-    return UserController;
+    return AuthService;
 }());
-exports.UserController = UserController;
+exports.AuthService = AuthService;

@@ -2,7 +2,7 @@
 exports.__esModule = true;
 exports.jobRouter = void 0;
 var express_1 = require("express");
-var jobModuler_1 = require("../app/jobs/jobModuler");
+var jobModuler_1 = require("../app/jobs/jobModuler.cjs");
 var jobRouter = (0, express_1.Router)();
 exports.jobRouter = jobRouter;
 var controller = jobModuler_1.JobModule.getInstances().controller;
